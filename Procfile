@@ -1,0 +1,1 @@
+web: gunicorn bioquery.wsgi --log-file -

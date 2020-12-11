@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="content-wrap">
+    <div class="pt-160 pb-130 mt-10 shape-parent">
+      <div class="container text-center">
+        <div class="row justify-content-center text-center">
+          <div class="col-12 col-lg-10 col-xl-8">
+            <h1
+              class="mb-60"
+              style="
+                transform: translateY(0px);
+                transition-duration: 500ms;
+                opacity: 1;
+              "
+            >
+              Aprenda mais lendo artigos ✌️
+            </h1>
+            <form method="GET" action="." class="form-group-overlay">
+              <input
+                name="q"
+                type="text"
+                class="form-control"
+                placeholder="Digite um termo *"
+                value="{{ query }}"
+              />
+              <button class="btn btn-clean btn-with-ball">
+                buscar<span class="btn-ball"></span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="shape mt-n160">
+        <svg
+          width="518"
+          height="641"
+          viewBox="0 0 518 641"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          style="transform: translate3d(0px, 3px, 0px)"
+        >
+          <circle cx="197.5" cy="320.5" r="320.5" fill="#F5F5F5"></circle>
+        </svg>
+      </div>
+    </div>
+    <div class="container isotope mb-30">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+          {% for article in articles %}
+            <div class="row mb-30">
+              <div class="col-12 mb-20">
+                <p class="subtitle mt-n10" style="transform: translateY(0px); transition-duration: 500ms; opacity: 1; text-transform: lowercase;">{{ article.category.name }}</p>
+                <h3 class="mb-n7" style="transform: translateY(0px); transition-duration: 500ms; opacity: 1;"><a href="{% url 'articles:detail' slug=article.slug %}">{{ article.title }}</a></h3>
+              </div>
+              <div class="col-12" style="transition-duration: 700ms; opacity: 1; transform: translateY(0px);">
+                <p class="mb-3" style="display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden;">{{ article.content }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}
