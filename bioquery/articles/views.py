@@ -1,13 +1,8 @@
-from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from .models import Article
 
 
 def detail(request, slug):
-    try:
-        article = Article.objects.get(slug=slug)
-    except Article.DoesNotExist:
-        raise Http404
-
+    article = get_object_or_404(Article, slug=slug)
     return render(request, 'articles/article_detail.html', {'article': article})
