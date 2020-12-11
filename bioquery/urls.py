@@ -10,7 +10,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("articles/", include("bioquery.articles.urls")),
     path("", include("bioquery.core.urls")),
-    path('tinymce/', include('tinymce.urls')),
 ]
 
 if settings.DEBUG:
