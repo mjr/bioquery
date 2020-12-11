@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %} {% load static %}
+{% block nav %} {% endblock %}
+{% block content %}
 <style>
   .landing {
     position: relative;
@@ -17,7 +19,7 @@
 </style>
 <section class="landing min-vh-100">
   <div class="container">
-      {% include "nav.html" only %}
+      {% include "nav.html" %}
     <div class="row mt-60">
       <div class="col-12 col-md-6 pt-60">
         <h2 class="h3">Search for even the smallest molecules.</h2>

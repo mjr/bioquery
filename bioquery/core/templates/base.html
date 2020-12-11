@@ -15,7 +15,8 @@
   </head>
   <body class="navbar-scroll navbar-show">
     
-    
+    {% block nav %} {% include "nav.html" only %} {% endblock nav %}
+
     {% block content %} {% endblock content %}
 
     <footer class="w-100 pt-40 pb-40" style="background: #525b68">

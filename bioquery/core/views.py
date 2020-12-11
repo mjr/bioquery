@@ -7,3 +7,8 @@ from bioquery.articles.models import Article
 def home(request):
 
     return render(request, "index.html")
+
+
+def pannel(request):
+
+    return render(request, "pannel.html")
