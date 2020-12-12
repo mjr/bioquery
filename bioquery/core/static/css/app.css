@@ -129,17 +129,9 @@
 .btn:hover .icon-arrow-right path:last-child,
 .btn:hover .swiper-button-next svg path:last-child,
 .card-service.card-hover-zoom:focus .btn .icon-arrow-right path:last-child,
-.card-service.card-hover-zoom:focus
-  .btn
-  .swiper-button-next
-  svg
-  path:last-child,
+.card-service.card-hover-zoom:focus .btn .swiper-button-next svg path:last-child,
 .card-service.card-hover-zoom:hover .btn .icon-arrow-right path:last-child,
-.card-service.card-hover-zoom:hover
-  .btn
-  .swiper-button-next
-  svg
-  path:last-child,
+.card-service.card-hover-zoom:hover .btn .swiper-button-next svg path:last-child,
 .icon-arrow-right-hover path:last-child,
 .nav .nav-link.active .icon-arrow-right path:last-child,
 .nav .nav-link.active .swiper-button-next svg path:last-child,
@@ -149,16 +141,8 @@
 .nav .nav-link:hover .swiper-button-next svg path:last-child,
 .swiper-button-next .btn:focus svg path:last-child,
 .swiper-button-next .btn:hover svg path:last-child,
-.swiper-button-next
-  .card-service.card-hover-zoom:focus
-  .btn
-  svg
-  path:last-child,
-.swiper-button-next
-  .card-service.card-hover-zoom:hover
-  .btn
-  svg
-  path:last-child,
+.swiper-button-next .card-service.card-hover-zoom:focus .btn svg path:last-child,
+.swiper-button-next .card-service.card-hover-zoom:hover .btn svg path:last-child,
 .swiper-button-next .nav .nav-link.active svg path:last-child,
 .swiper-button-next .nav .nav-link:focus svg path:last-child,
 .swiper-button-next .nav .nav-link:hover svg path:last-child,
@@ -199,11 +183,11 @@
   --breakpoint-md: 828px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1200px;
-  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New",
+    monospace;
 }
 *,
 ::after,
@@ -231,7 +215,7 @@ section {
 }
 body {
   margin: 0;
-  font-family: Inter, sans-serif;
+  font-family: Roboto, Inter, sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.6;
@@ -339,8 +323,7 @@ code,
 kbd,
 pre,
 samp {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-size: 1em;
 }
 pre {
@@ -498,7 +481,7 @@ h4,
 h5,
 h6 {
   margin-bottom: 1.66667rem;
-  font-family: Inter, sans-serif;
+  font-family: Roboto, Inter, sans-serif;
   font-weight: 500;
   line-height: 1.2;
 }
@@ -2284,7 +2267,7 @@ pre code {
   width: 100%;
   height: auto;
   padding: 0 0;
-  font-family: Inter, sans-serif;
+  font-family: Roboto, Inter, sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.6;
@@ -2293,10 +2276,8 @@ pre code {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0;
-  -webkit-transition: border-color 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
-  transition: border-color 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
+  -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   -o-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out,
@@ -2559,24 +2540,17 @@ textarea.form-control.is-valid {
   border-color: #28a745;
 }
 .custom-control-input.is-valid:checked ~ .custom-control-label::before,
-.was-validated
-  .custom-control-input:valid:checked
-  ~ .custom-control-label::before {
+.was-validated .custom-control-input:valid:checked ~ .custom-control-label::before {
   border-color: #34ce57;
   background-color: #34ce57;
 }
 .custom-control-input.is-valid:focus ~ .custom-control-label::before,
-.was-validated
-  .custom-control-input:valid:focus
-  ~ .custom-control-label::before {
+.was-validated .custom-control-input:valid:focus ~ .custom-control-label::before {
   -webkit-box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.25);
   box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.25);
 }
-.custom-control-input.is-valid:focus:not(:checked)
-  ~ .custom-control-label::before,
-.was-validated
-  .custom-control-input:valid:focus:not(:checked)
-  ~ .custom-control-label::before {
+.custom-control-input.is-valid:focus:not(:checked) ~ .custom-control-label::before,
+.was-validated .custom-control-input:valid:focus:not(:checked) ~ .custom-control-label::before {
   border-color: #28a745;
 }
 .custom-file-input.is-valid ~ .custom-file-label,
@@ -2670,24 +2644,17 @@ textarea.form-control.is-invalid {
   border-color: #dc3545;
 }
 .custom-control-input.is-invalid:checked ~ .custom-control-label::before,
-.was-validated
-  .custom-control-input:invalid:checked
-  ~ .custom-control-label::before {
+.was-validated .custom-control-input:invalid:checked ~ .custom-control-label::before {
   border-color: #e4606d;
   background-color: #e4606d;
 }
 .custom-control-input.is-invalid:focus ~ .custom-control-label::before,
-.was-validated
-  .custom-control-input:invalid:focus
-  ~ .custom-control-label::before {
+.was-validated .custom-control-input:invalid:focus ~ .custom-control-label::before {
   -webkit-box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.25);
   box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.25);
 }
-.custom-control-input.is-invalid:focus:not(:checked)
-  ~ .custom-control-label::before,
-.was-validated
-  .custom-control-input:invalid:focus:not(:checked)
-  ~ .custom-control-label::before {
+.custom-control-input.is-invalid:focus:not(:checked) ~ .custom-control-label::before,
+.was-validated .custom-control-input:invalid:focus:not(:checked) ~ .custom-control-label::before {
   border-color: #dc3545;
 }
 .custom-file-input.is-invalid ~ .custom-file-label,
@@ -2791,7 +2758,7 @@ textarea.form-control.is-invalid {
 }
 .btn {
   display: inline-block;
-  font-family: Inter, sans-serif;
+  font-family: Roboto, Inter, sans-serif;
   font-weight: 400;
   color: #0e0e0e;
   text-align: center;
@@ -2806,9 +2773,8 @@ textarea.form-control.is-invalid {
   font-size: 1rem;
   line-height: 1.6;
   border-radius: 0;
-  -webkit-transition: color 0.15s ease-in-out,
-    background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
+  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   -o-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
@@ -3976,12 +3942,8 @@ input[type="submit"].btn-block {
 .input-group-sm > .custom-select {
   padding-right: 1rem;
 }
-.input-group
-  > .input-group-append:last-child
-  > .btn:not(:last-child):not(.dropdown-toggle),
-.input-group
-  > .input-group-append:last-child
-  > .input-group-text:not(:last-child),
+.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.input-group > .input-group-append:last-child > .input-group-text:not(:last-child),
 .input-group > .input-group-append:not(:last-child) > .btn,
 .input-group > .input-group-append:not(:last-child) > .input-group-text,
 .input-group > .input-group-prepend > .btn,
@@ -3992,9 +3954,7 @@ input[type="submit"].btn-block {
 .input-group > .input-group-append > .btn,
 .input-group > .input-group-append > .input-group-text,
 .input-group > .input-group-prepend:first-child > .btn:not(:first-child),
-.input-group
-  > .input-group-prepend:first-child
-  > .input-group-text:not(:first-child),
+.input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child),
 .input-group > .input-group-prepend:not(:first-child) > .btn,
 .input-group > .input-group-prepend:not(:first-child) > .input-group-text {
   border-top-left-radius: 0;
@@ -4078,25 +4038,17 @@ input[type="submit"].btn-block {
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z'/%3e%3c/svg%3e");
 }
-.custom-checkbox
-  .custom-control-input:indeterminate
-  ~ .custom-control-label::before {
+.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
   border-color: #007bff;
   background-color: #007bff;
 }
-.custom-checkbox
-  .custom-control-input:indeterminate
-  ~ .custom-control-label::after {
+.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3e%3cpath stroke='%23fff' d='M0 2h4'/%3e%3c/svg%3e");
 }
-.custom-checkbox
-  .custom-control-input:disabled:checked
-  ~ .custom-control-label::before {
+.custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
   background-color: rgba(0, 123, 255, 0.5);
 }
-.custom-checkbox
-  .custom-control-input:disabled:indeterminate
-  ~ .custom-control-label::before {
+.custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {
   background-color: rgba(0, 123, 255, 0.5);
 }
 .custom-radio .custom-control-label::before {
@@ -4105,9 +4057,7 @@ input[type="submit"].btn-block {
 .custom-radio .custom-control-input:checked ~ .custom-control-label::after {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
 }
-.custom-radio
-  .custom-control-input:disabled:checked
-  ~ .custom-control-label::before {
+.custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
   background-color: rgba(0, 123, 255, 0.5);
 }
 .custom-switch {
@@ -4126,9 +4076,8 @@ input[type="submit"].btn-block {
   height: calc(1rem - 4px);
   background-color: #adb5bd;
   border-radius: 0.5rem;
-  -webkit-transition: background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
+  -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    -webkit-transform 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     -webkit-transform 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   -o-transition: transform 0.15s ease-in-out, background-color 0.15s ease-in-out,
@@ -4152,9 +4101,7 @@ input[type="submit"].btn-block {
   -ms-transform: translateX(0.75rem);
   transform: translateX(0.75rem);
 }
-.custom-switch
-  .custom-control-input:disabled:checked
-  ~ .custom-control-label::before {
+.custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
   background-color: rgba(0, 123, 255, 0.5);
 }
 .custom-select {
@@ -4162,7 +4109,7 @@ input[type="submit"].btn-block {
   width: 100%;
   height: auto;
   padding: 0 1rem 0 0;
-  font-family: Inter, sans-serif;
+  font-family: Roboto, Inter, sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.6;
@@ -4256,7 +4203,7 @@ input[type="submit"].btn-block {
   z-index: 1;
   height: auto;
   padding: 0 0;
-  font-family: Inter, sans-serif;
+  font-family: Roboto, Inter, sans-serif;
   font-weight: 400;
   line-height: 1.6;
   color: #0e0e0e;
@@ -4312,8 +4259,8 @@ input[type="submit"].btn-block {
   background-color: #007bff;
   border: 0;
   border-radius: 1rem;
-  -webkit-transition: background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     -webkit-box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
@@ -4347,8 +4294,8 @@ input[type="submit"].btn-block {
   background-color: #007bff;
   border: 0;
   border-radius: 1rem;
-  -moz-transition: background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  -moz-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
   -moz-appearance: none;
@@ -4381,8 +4328,8 @@ input[type="submit"].btn-block {
   background-color: #007bff;
   border: 0;
   border-radius: 1rem;
-  -ms-transition: background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  -ms-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
   appearance: none;
@@ -4432,12 +4379,12 @@ input[type="submit"].btn-block {
 .custom-control-label::before,
 .custom-file-label,
 .custom-select {
-  -webkit-transition: background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    -webkit-box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     -webkit-box-shadow 0.15s ease-in-out;
-  -o-transition: background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  -o-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
     box-shadow 0.15s ease-in-out;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
@@ -5323,9 +5270,8 @@ input[type="submit"].btn-block {
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: 0;
-  -webkit-transition: color 0.15s ease-in-out,
-    background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
-    -webkit-box-shadow 0.15s ease-in-out;
+  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
   -o-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
@@ -6321,7 +6267,7 @@ a.close.disabled {
   z-index: 1070;
   display: block;
   margin: 0;
-  font-family: Inter, sans-serif;
+  font-family: Roboto, Inter, sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -6429,7 +6375,7 @@ a.close.disabled {
   z-index: 1060;
   display: block;
   max-width: 276px;
-  font-family: Inter, sans-serif;
+  font-family: Roboto, Inter, sans-serif;
   font-style: normal;
   font-weight: 400;
   line-height: 1.6;
@@ -6927,6 +6873,9 @@ a.bg-light:hover,
 button.bg-light:focus,
 button.bg-light:hover {
   background-color: #dcdcdc !important;
+}
+.bg-orange {
+  background-color: #f56c1f;
 }
 .bg-dark {
   background-color: #0e0e0e !important;
@@ -16258,8 +16207,7 @@ button.bg-dark:hover {
   background-color: rgba(0, 0, 0, 0);
 }
 .text-monospace {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
-    "Courier New", monospace !important;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
 }
 .text-justify {
   text-align: justify !important;
@@ -17505,8 +17453,7 @@ select.form-control {
 .card-portfolio.card-hover-appearance .card-title {
   opacity: 0;
   will-change: transform, opacity;
-  -webkit-transition: opacity 0.2s ease-in-out,
-    -webkit-transform 0.2s ease-in-out;
+  -webkit-transition: opacity 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
   transition: opacity 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
   -o-transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
   transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
@@ -17564,8 +17511,7 @@ select.form-control {
 .card-portfolio.card-hover-bar .card-title {
   opacity: 0;
   will-change: transform, opacity;
-  -webkit-transition: opacity 0.25s ease-in-out,
-    -webkit-transform 0.25s ease-in-out;
+  -webkit-transition: opacity 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
   transition: opacity 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
   -o-transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out;
   transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out;
@@ -17680,16 +17626,11 @@ select.form-control {
 .card-service.card-hover-zoom .btn {
   opacity: 0;
   will-change: transform, opacity;
-  -webkit-transition: opacity 0.3s ease-in-out,
-    -webkit-transform 0.65s cubic-bezier(0.2, 1, 0.2, 1);
-  transition: opacity 0.3s ease-in-out,
-    -webkit-transform 0.65s cubic-bezier(0.2, 1, 0.2, 1);
-  -o-transition: transform 0.65s cubic-bezier(0.2, 1, 0.2, 1),
-    opacity 0.3s ease-in-out;
-  transition: transform 0.65s cubic-bezier(0.2, 1, 0.2, 1),
-    opacity 0.3s ease-in-out;
-  transition: transform 0.65s cubic-bezier(0.2, 1, 0.2, 1),
-    opacity 0.3s ease-in-out,
+  -webkit-transition: opacity 0.3s ease-in-out, -webkit-transform 0.65s cubic-bezier(0.2, 1, 0.2, 1);
+  transition: opacity 0.3s ease-in-out, -webkit-transform 0.65s cubic-bezier(0.2, 1, 0.2, 1);
+  -o-transition: transform 0.65s cubic-bezier(0.2, 1, 0.2, 1), opacity 0.3s ease-in-out;
+  transition: transform 0.65s cubic-bezier(0.2, 1, 0.2, 1), opacity 0.3s ease-in-out;
+  transition: transform 0.65s cubic-bezier(0.2, 1, 0.2, 1), opacity 0.3s ease-in-out,
     -webkit-transform 0.65s cubic-bezier(0.2, 1, 0.2, 1);
   -webkit-transform: translateY(48px);
   -ms-transform: translateY(48px);
@@ -18260,8 +18201,7 @@ select.form-control {
   transition: opacity 0.3s ease, -webkit-transform 0.35s ease;
   -o-transition: transform 0.35s ease, opacity 0.3s ease;
   transition: transform 0.35s ease, opacity 0.3s ease;
-  transition: transform 0.35s ease, opacity 0.3s ease,
-    -webkit-transform 0.35s ease;
+  transition: transform 0.35s ease, opacity 0.3s ease, -webkit-transform 0.35s ease;
 }
 .swiper-pagination-bullet:not(:first-child) {
   position: absolute;
@@ -18407,35 +18347,23 @@ select.form-control {
   transition-delay: 0.55s;
 }
 .swiper-portfolio.swiper-portfolio-banner .swiper-slide-active .card-title,
-.swiper-portfolio.swiper-portfolio-banner
-  .swiper-slide-duplicate-active
-  .card-title {
+.swiper-portfolio.swiper-portfolio-banner .swiper-slide-duplicate-active .card-title {
   -webkit-transform: translateY(0);
   -ms-transform: translateY(0);
   transform: translateY(0);
 }
-.swiper-portfolio.swiper-portfolio-banner
-  .swiper-slide-active
-  .card-title-decoration,
-.swiper-portfolio.swiper-portfolio-banner
-  .swiper-slide-duplicate-active
-  .card-title-decoration {
+.swiper-portfolio.swiper-portfolio-banner .swiper-slide-active .card-title-decoration,
+.swiper-portfolio.swiper-portfolio-banner .swiper-slide-duplicate-active .card-title-decoration {
   width: 70px;
 }
 .swiper-portfolio.swiper-portfolio-banner .swiper-slide-active .card-category,
-.swiper-portfolio.swiper-portfolio-banner
-  .swiper-slide-duplicate-active
-  .card-category {
+.swiper-portfolio.swiper-portfolio-banner .swiper-slide-duplicate-active .card-category {
   -webkit-transform: translateY(0);
   -ms-transform: translateY(0);
   transform: translateY(0);
 }
-.swiper-portfolio.swiper-portfolio-banner
-  .swiper-slide-active
-  .card-img-overlay,
-.swiper-portfolio.swiper-portfolio-banner
-  .swiper-slide-duplicate-active
-  .card-img-overlay {
+.swiper-portfolio.swiper-portfolio-banner .swiper-slide-active .card-img-overlay,
+.swiper-portfolio.swiper-portfolio-banner .swiper-slide-duplicate-active .card-img-overlay {
   opacity: 1;
 }
 .swiper-portfolio .swiper-pagination {
@@ -18585,9 +18513,7 @@ select.form-control {
   position: relative;
   z-index: 1;
 }
-.swiper-full-horizontal:not(.swiper-full)
-  .swiper-button-wrapper
-  + .swiper-pagination {
+.swiper-full-horizontal:not(.swiper-full) .swiper-button-wrapper + .swiper-pagination {
   margin-top: -35px;
   margin-bottom: 70px;
 }
@@ -18627,8 +18553,7 @@ select.form-control {
 }
 .swiper-full-horizontal .card-title {
   opacity: 0;
-  -webkit-transition: opacity 0.4s,
-    -webkit-transform 0.8s cubic-bezier(0.2, 1, 0.2, 1);
+  -webkit-transition: opacity 0.4s, -webkit-transform 0.8s cubic-bezier(0.2, 1, 0.2, 1);
   transition: opacity 0.4s, -webkit-transform 0.8s cubic-bezier(0.2, 1, 0.2, 1);
   -o-transition: transform 0.8s cubic-bezier(0.2, 1, 0.2, 1), opacity 0.4s;
   transition: transform 0.8s cubic-bezier(0.2, 1, 0.2, 1), opacity 0.4s;
@@ -18643,8 +18568,7 @@ select.form-control {
 }
 .swiper-full-horizontal .card-category {
   opacity: 0;
-  -webkit-transition: opacity 0.4s,
-    -webkit-transform 0.8s cubic-bezier(0.2, 1, 0.2, 1);
+  -webkit-transition: opacity 0.4s, -webkit-transform 0.8s cubic-bezier(0.2, 1, 0.2, 1);
   transition: opacity 0.4s, -webkit-transform 0.8s cubic-bezier(0.2, 1, 0.2, 1);
   -o-transition: transform 0.8s cubic-bezier(0.2, 1, 0.2, 1), opacity 0.4s;
   transition: transform 0.8s cubic-bezier(0.2, 1, 0.2, 1), opacity 0.4s;
@@ -18749,8 +18673,7 @@ select.form-control {
 }
 .swiper-fullscreen-vertical .btn {
   opacity: 0;
-  -webkit-transition: opacity 0.4s,
-    -webkit-transform 0.5s cubic-bezier(0.2, 1, 0.2, 1);
+  -webkit-transition: opacity 0.4s, -webkit-transform 0.5s cubic-bezier(0.2, 1, 0.2, 1);
   transition: opacity 0.4s, -webkit-transform 0.5s cubic-bezier(0.2, 1, 0.2, 1);
   -o-transition: transform 0.5s cubic-bezier(0.2, 1, 0.2, 1), opacity 0.4s;
   transition: transform 0.5s cubic-bezier(0.2, 1, 0.2, 1), opacity 0.4s;
@@ -18774,9 +18697,7 @@ select.form-control {
   transform: translateY(0);
 }
 .swiper-fullscreen-vertical .swiper-slide-active .card-title-decoration,
-.swiper-fullscreen-vertical
-  .swiper-slide-duplicate-active
-  .card-title-decoration {
+.swiper-fullscreen-vertical .swiper-slide-duplicate-active .card-title-decoration {
   width: 70px;
 }
 .swiper-fullscreen-vertical .swiper-slide-active .btn,
@@ -19081,7 +19002,7 @@ h6 {
 }
 .subtitle {
   margin-bottom: 1.2em;
-  font-family: Inter, sans-serif;
+  font-family: Roboto, Inter, sans-serif;
   font-size: 0.9375em;
   font-weight: 500;
   line-height: 1.8;
@@ -19135,7 +19056,7 @@ blockquote {
   right: 0;
   left: 0;
   width: 100%;
-  min-height: 90px;
+  min-height: 60px;
 }
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   .navbar-top {
@@ -19144,15 +19065,9 @@ blockquote {
   .navbar-top:not([class*="position-"]) ~ .content-wrap {
     padding-top: 90px;
   }
-  .navbar-top:not([class*="position-"])
-    ~ .content-wrap
-    > .min-vh-100:first-child,
-  .navbar-top:not([class*="position-"])
-    ~ .content-wrap
-    > .swiper-full:first-child,
-  .navbar-top:not([class*="position-"])
-    ~ .content-wrap
-    > .swiper-fullscreen-vertical:first-child {
+  .navbar-top:not([class*="position-"]) ~ .content-wrap > .min-vh-100:first-child,
+  .navbar-top:not([class*="position-"]) ~ .content-wrap > .swiper-full:first-child,
+  .navbar-top:not([class*="position-"]) ~ .content-wrap > .swiper-fullscreen-vertical:first-child {
     margin-top: -90px;
   }
   .navbar-top:not([class*="position-"]).navbar-dark ~ .banner::before {
@@ -19160,9 +19075,7 @@ blockquote {
     display: block;
     padding-top: 90px;
   }
-  .navbar-top:not([class*="position-"]).navbar-dark
-    ~ .banner
-    ~ .content-wrap::before {
+  .navbar-top:not([class*="position-"]).navbar-dark ~ .banner ~ .content-wrap::before {
     display: none;
   }
   .navbar-top:not([class*="position-"]).navbar-dark ~ .content-wrap::before {
@@ -19184,7 +19097,7 @@ blockquote {
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: #fff;
+  background-color: transparent;
   will-change: transform;
   -webkit-transition: -webkit-transform 0.6s cubic-bezier(0.2, 1, 0.2, 1);
   transition: -webkit-transform 0.6s cubic-bezier(0.2, 1, 0.2, 1);
@@ -19958,12 +19871,7 @@ blockquote {
 .navbar-mobile-style-4.navbar-dark .navbar-head {
   background-color: #0e0e0e;
 }
-.navbar-top
-  .container
-  > .navbar-nav
-  > .navbar-dropdown:not(.navbar-dropdown-mega)
-  > .nav-link
-  svg {
+.navbar-top .container > .navbar-nav > .navbar-dropdown:not(.navbar-dropdown-mega) > .nav-link svg {
   display: none;
 }
 .navbar-top
@@ -20226,8 +20134,7 @@ blockquote {
   margin-bottom: 3px;
   background-color: currentColor;
   will-change: transform, opacity;
-  -webkit-transition: opacity 0.2s ease-in-out,
-    -webkit-transform 0.2s ease-in-out;
+  -webkit-transition: opacity 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
   transition: opacity 0.2s ease-in-out, -webkit-transform 0.2s ease-in-out;
   -o-transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
   transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
@@ -20303,10 +20210,10 @@ blockquote {
   backface-visibility: hidden;
   opacity: 0;
   will-change: transform, width, height, top, left, background-color, opacity;
-  -webkit-transition: width 0.2s ease, height 0.2s ease, top 0.2s ease,
-    left 0.2s ease, background-color 0.2s ease, opacity 0.15s ease;
-  -o-transition: width 0.2s ease, height 0.2s ease, top 0.2s ease,
-    left 0.2s ease, background-color 0.2s ease, opacity 0.15s ease;
+  -webkit-transition: width 0.2s ease, height 0.2s ease, top 0.2s ease, left 0.2s ease,
+    background-color 0.2s ease, opacity 0.15s ease;
+  -o-transition: width 0.2s ease, height 0.2s ease, top 0.2s ease, left 0.2s ease,
+    background-color 0.2s ease, opacity 0.15s ease;
   transition: width 0.2s ease, height 0.2s ease, top 0.2s ease, left 0.2s ease,
     background-color 0.2s ease, opacity 0.15s ease;
   z-index: 9999999;
@@ -20626,8 +20533,7 @@ blockquote {
   transition: opacity 0.15s, -webkit-transform 0.25s ease-in-out;
   -o-transition: opacity 0.15s, transform 0.25s ease-in-out;
   transition: opacity 0.15s, transform 0.25s ease-in-out;
-  transition: opacity 0.15s, transform 0.25s ease-in-out,
-    -webkit-transform 0.25s ease-in-out;
+  transition: opacity 0.15s, transform 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
 }
 .interactive-links.focus .subtitle,
 .interactive-links:hover .subtitle {
@@ -20699,8 +20605,7 @@ blockquote {
     transition: opacity 0.25s, -webkit-transform 0.25s ease-in-out;
     -o-transition: opacity 0.25s, transform 0.25s ease-in-out;
     transition: opacity 0.25s, transform 0.25s ease-in-out;
-    transition: opacity 0.25s, transform 0.25s ease-in-out,
-      -webkit-transform 0.25s ease-in-out;
+    transition: opacity 0.25s, transform 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
     -webkit-transform: translateX(-40px);
     -ms-transform: translateX(-40px);
     transform: translateX(-40px);
@@ -20970,8 +20875,7 @@ blockquote {
   top: 50%;
   opacity: 0;
   will-change: transform, opacity;
-  -webkit-transition: opacity 0.25s ease-in-out,
-    -webkit-transform 0.25s ease-in-out;
+  -webkit-transition: opacity 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
   transition: opacity 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
   -o-transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out;
   transition: transform 0.25s ease-in-out, opacity 0.25s ease-in-out;

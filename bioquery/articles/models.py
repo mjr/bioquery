@@ -36,9 +36,6 @@ class Article(models.Model):
             return cursor.lastrowid
 
     def save(self):
-        # super().save()
-        # from django.db import connection
-        # print(connection.queries)
         self.slug = slugify(self.title)
         self.added_in = timezone.now()
         self.pk = self.save_db()

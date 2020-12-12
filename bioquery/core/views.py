@@ -12,3 +12,23 @@ def home(request):
     else:
         articles = Article.objects_db.all()
     return render(request, 'index.html', {'query': query, 'articles': articles})
+
+
+def pannel(request):
+    return render(request, "pannel.html")
+
+
+def search(request):
+    return render(request, "search.html")
+
+
+def new_post(request):
+    return render(request, "new_post.html")
+
+
+def new_dna(request):
+    return render(request, "new_post.html")
+
+
+def new_reference(request):
+    return render(request, "new_post.html")

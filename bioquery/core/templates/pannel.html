@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% block content %}
+<div class="container-fluid" style="min-height: calc(100vh - 94px)">
+  <div class="row justify-content-center pt-60 pb-60">
+    <div class="col-10 d-flex">
+      <div>
+        <h4>Suas publicações</h4>
+        <p>Resultados encontrados</p>
+      </div>
+      <div class="ml-auto">
+        <a class="btn-primary py-10 px-30 rounded-sm" href="{% url 'new_post' %}">Novo</a>
+      </div>
+    </div>
+    <div class="col-md-10">
+      {% if results|length == 0 %}
+      <p class="alert-info p-2 text-center">Nenhum resultado encontrado</p>
+      {% endif %} {% for result in results %} {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock content %}

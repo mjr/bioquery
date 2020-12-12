@@ -1,0 +1,11 @@
+.button {
+  background-color: #f56c1f;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+.card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+}

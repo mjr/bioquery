@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mt-60" style="min-height: calc(100vh - 94px)">
+  <div class="row">
+    <div class="col-md-12">
+      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %} {{ form.as_p }} {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <button type="submit">Registrar</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

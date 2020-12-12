@@ -1,65 +1,73 @@
-{% extends 'base.html' %}
-
+{% extends 'base.html' %} {% load static %}
+{% block nav %} {% endblock %}
 {% block content %}
-  <div class="content-wrap">
-    <div class="pt-160 pb-130 mt-10 shape-parent">
-      <div class="container text-center">
-        <div class="row justify-content-center text-center">
-          <div class="col-12 col-lg-10 col-xl-8">
-            <h1
-              class="mb-60"
-              style="
-                transform: translateY(0px);
-                transition-duration: 500ms;
-                opacity: 1;
-              "
-            >
-              Aprenda mais lendo artigos ✌️
-            </h1>
-            <form method="GET" action="." class="form-group-overlay">
-              <input
-                name="q"
-                type="text"
-                class="form-control"
-                placeholder="Digite um termo *"
-                value="{{ query }}"
-              />
-              <button class="btn btn-clean btn-with-ball">
-                buscar<span class="btn-ball"></span>
-              </button>
-            </form>
-          </div>
+<style>
+  .landing {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image: url(/static/img/initial_background.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+  }
+  .landing h2 {
+    font-family: "Roboto Condensed";
+    font-weight: bold;
+    color: #2b2b2b;
+  }
+</style>
+<section class="landing min-vh-100">
+  <div class="container">
+      {% include "nav.html" %}
+    <div class="row mt-60">
+      <div class="col-12 col-md-6 pt-60">
+        <h2 class="h3">Search for even the smallest molecules.</h2>
+        <hr class="m-0" style="width: 40px; color: #f56c1f; border-width: 3px" />
+        <form method="GET" action="search">
+        <div class="input-group mb-3 mt-40">
+          <input name="name" class="form-control p-2" style="border: 1px solid #f56c1f;" />
+          <button type="submit" class="input-group-append p-0 m-0" style="border: 1px solid #F56C1F;">
+            <i style="line-height: 2rem; background-color: #F56C1F; padding: 5px 20px" class="feather-search text-white"></i>
+          </button>
         </div>
+      </form>
       </div>
-      <div class="shape mt-n160">
-        <svg
-          width="518"
-          height="641"
-          viewBox="0 0 518 641"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          style="transform: translate3d(0px, 3px, 0px)"
-        >
-          <circle cx="197.5" cy="320.5" r="320.5" fill="#F5F5F5"></circle>
-        </svg>
-      </div>
-    </div>
-    <div class="container isotope mb-30">
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-10">
-          {% for article in articles %}
-            <div class="row mb-30">
-              <div class="col-12 mb-20">
-                <p class="subtitle mt-n10" style="transform: translateY(0px); transition-duration: 500ms; opacity: 1; text-transform: lowercase;">{{ article.category.name }}</p>
-                <h3 class="mb-n7" style="transform: translateY(0px); transition-duration: 500ms; opacity: 1;"><a href="{% url 'articles:detail' slug=article.slug %}">{{ article.title }}</a></h3>
-              </div>
-              <div class="col-12" style="transition-duration: 700ms; opacity: 1; transform: translateY(0px);">
-                <p class="mb-3" style="display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden;">{{ article.content }}</p>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
+      <div class="col-md-6 text-center d-none d-sm-block">
+        <img style="width: 264px" src="{% static 'img/biological.svg' %}" />
       </div>
     </div>
   </div>
+</section>
+<section class="mt-60 mb-60 w-100">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 text-center">
+        <h2 class="h3">Lots of data</h2>
+        <p style="font-size: 20px">
+          We provide a quick way to search for gene expressions, Phenotypes, Proteins and more
+          amazing things.
+        </p>
+        <a class="button" href="#">View more</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="mt-60 mb-60 w-100">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-3 text-center">
+        <img class="img-fluid" src="{% static 'img/people_on_the_grass.svg' %}" />
+      </div>
+      <div class="col-12 col-md-9 pl-30">
+        <h3>The union makes the difference</h3>
+        <p style="font-size: 18px">
+          You can contribute and help many people who seek your knowledge. Edit the pages,
+          participate in the forum and make it possible to create amazing things.
+        </p>
+        <a>PARTICIPATE</a>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock content %}

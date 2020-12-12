@@ -7,8 +7,9 @@ from django.urls import path, include
 admin.site.enable_nav_sidebar = False
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     path("articles/", include("bioquery.articles.urls")),
+    path("accounts/", include("allauth.urls")),
     path("", include("bioquery.core.urls")),
 ]
 
