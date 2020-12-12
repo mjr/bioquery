@@ -3,31 +3,31 @@
 {% block title %}{{ article.title }} - BioQuery{% endblock title %}
 
 {% block content %}
-  <div class="content-wrap py-160">
-    <div class="container isotope">
-      <div class="row justify-content-center">
-        <div class="col-12 col-lg-10">
-          <div class="row">
-            <div class="col-12 mb-20">
-              <p class="subtitle mt-n10" style="transform: translateY(0px); transition-duration: 500ms; opacity: 1; text-transform: lowercase;">{{ article.category.name }}</p>
-              <h3 class="mb-n7" style="transform: translateY(0px); transition-duration: 500ms; opacity: 1;">{{ article.title }}</h3>
-            </div>
-            <div class="col-12" style="transition-duration: 700ms; opacity: 1; transform: translateY(0px);">
-              <p class="mb-3">{{ article.content }}</p>
-            </div>
-            <div class="col-12" style="transition-duration: 700ms; opacity: 1; transform: translateY(0px);">
-              {% for dna in article.dnas.all %}
-                <p>{{ dna.sequence }}</p>
-              {% endfor %}
-            </div>
-            <div class="col-12" style="transition-duration: 700ms; opacity: 1; transform: translateY(0px);">
-              {% for photo in article.photos.all %}
-                <img src="{{ photo.file.url }}" width="300px" />
-              {% endfor %}
-            </div>
+<div class="content-wrap py-160">
+  <div class="container isotope">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        <div class="row">
+          <div class="col-12 mb-20">
+            <p class="subtitle mt-n10" style="transform: translateY(0px); transition-duration: 500ms; opacity: 1; text-transform: lowercase;">{{ article.category.name }}</p>
+            <h3 class="mb-n7" style="transform: translateY(0px); transition-duration: 500ms; opacity: 1;">{{ article.title }}</h3>
+          </div>
+          <div class="col-12" style="transition-duration: 700ms; opacity: 1; transform: translateY(0px);">
+            <p class="mb-3">{{ article.content }}</p>
+          </div>
+          <div class="col-12" style="transition-duration: 700ms; opacity: 1; transform: translateY(0px);">
+            {% for dna in article.dnas.all %}
+              <p>{{ dna.sequence }}</p>
+            {% endfor %}
+          </div>
+          <div class="col-12" style="transition-duration: 700ms; opacity: 1; transform: translateY(0px);">
+            {% for photo in article.photos.all %}
+              <img src="{{ photo.file.url }}" width="300px" />
+            {% endfor %}
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 {% endblock content %}

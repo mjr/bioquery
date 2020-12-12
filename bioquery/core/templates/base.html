@@ -23,6 +23,13 @@
               <span class="nav-link-name">artigos</span>
             </a>
           </li>
+          {% if request.user.is_authenticated %}
+            <li class="nav-item">
+              <a href="{% url 'articles:new' %}" class="nav-link">
+                <span class="nav-link-name">adicionar artigo</span>
+              </a>
+            </li>
+          {% endif %}
         </ul>
       </div>
     </header>

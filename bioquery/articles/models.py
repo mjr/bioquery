@@ -1,4 +1,11 @@
+from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
+from django.utils.text import slugify
+
+from bioquery.core.models import Category, Photo
+
+from .managers import ArticleDB
 
 
 class Article(models.Model):
@@ -11,6 +18,8 @@ class Article(models.Model):
     photos = models.ManyToManyField('core.Photo', verbose_name='fotos', blank=True)
     added_in = models.DateTimeField('adicionado em', auto_now_add=True)
 
+    objects_db = ArticleDB
+
     class Meta:
         verbose_name_plural = 'artigos'
         verbose_name = 'artigo'
@@ -18,3 +27,18 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save_db(self):
+        from django.db import connection
+        with connection.cursor() as cursor:
+            cursor.execute('INSERT INTO "articles_article" ("title", "slug", "content", "user_id", "category_id", "added_in") VALUES (%s, %s, %s, %s, %s, %s)', [self.title, self.slug, self.content, self.user.pk, self.category.pk, self.added_in])
+
+            return cursor.lastrowid
+
+    def save(self):
+        # super().save()
+        # from django.db import connection
+        # print(connection.queries)
+        self.slug = slugify(self.title)
+        self.added_in = timezone.now()
+        self.pk = self.save_db()

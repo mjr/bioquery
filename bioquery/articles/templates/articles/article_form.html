@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Novo artigo - BioQuery{% endblock title %}
+
+{% block content %}
+<div class="content-wrap py-160">
+  <div class="container isotope">
+    <h1 class="h2">Formulário do Artigo</h1>
+    <form method="POST" action="." enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="row gh-1 gv-2">
+        <div class="col-12" style="transform: translateY(0px); transition-duration: 400ms; opacity: 1;">
+          <!-- <input type="text" class="form-control" placeholder="Title"> -->
+          {{ form.title.errors }}
+          {{ form.title }}
+        </div>
+        <div class="col-12" style="transform: translateY(0px); transition-duration: 400ms; opacity: 1;">
+          <!-- <textarea class="form-control" rows="1" placeholder="Message *"></textarea> -->
+          {{ form.content.errors }}
+          {{ form.content }}
+        </div>
+        <div class="col-12" style="transform: translateY(0px); transition-duration: 400ms; opacity: 1;">
+          {{ form.category.errors }}
+          {{ form.category }}
+        </div>
+        <div class="col-12" style="transform: translateY(0px); transition-duration: 400ms; opacity: 1;">
+          {{ form.dnas.errors }}
+          {{ form.dnas }}
+        </div>
+        <div class="col-12" style="transform: translateY(0px); transition-duration: 400ms; opacity: 1;">
+          {{ form.photos.errors }}
+          {{ form.photos }}
+        </div>
+        <hr class="mt-30 width-70px" />
+        <div class="col-12">
+          <h2 class="h4">Adicione uma imagem <span style="font-size: 1rem; color: #cecece; font-style: italic;">- Opcional</span></h2>
+          {{ photo_form.non_field_errors }}
+          <div class="col-12" style="transform: translateY(0px); transition-duration: 400ms; opacity: 1;">
+            {{ photo_form.file.errors }}
+            {{ photo_form.file }}
+          </div>
+        </div>
+        <div class="col-12" style="transform: translateY(0px); transition-duration: 400ms; opacity: 1;">
+          <button class="btn btn-dark btn-with-ball mt-20" type="submit" name="button">enviar!<span class="btn-ball"></span></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}
