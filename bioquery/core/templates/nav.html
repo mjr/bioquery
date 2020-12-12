@@ -5,15 +5,21 @@
       </a>
       <ul class="nav navbar-nav">
         <li class="nav-item">
-          <a href="{% url 'home' %}" class="nav-link">
-            <span class="nav-link-name">artigos</span>
+          <a href="{% url 'search' %}" class="nav-link">
+            <span class="nav-link-name">Pesquisar</span>
           </a>
-          <a href="{% url 'home' %}" class="nav-link">
-            <span class="nav-link-name">artigos</span>
+          {% if user.is_authenticated %}
+          <a href="{% url 'pannel' %}" class="nav-link">
+            <span class="nav-link-name">Painel</span>
           </a>
+          <a href="{% url 'account_logout' %}" class="nav-link">
+            <span class="nav-link-name">Logout</span>
+          </a>
+          {% else %}
           <a href="{% url 'account_login' %}" class="nav-link">
             <span class="nav-link-name">Acesso</span>
           </a>
+          {% endif %}
         </li>
       </ul>
     </div>

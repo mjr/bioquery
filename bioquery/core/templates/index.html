@@ -24,16 +24,17 @@
       <div class="col-12 col-md-6 pt-60">
         <h2 class="h3">Search for even the smallest molecules.</h2>
         <hr class="m-0" style="width: 40px; color: #f56c1f; border-width: 3px" />
-
+        <form method="GET" action="search">
         <div class="input-group mb-3 mt-40">
-          <input class="form-control" style="border: 1px solid #f56c1f" />
-          <div class="input-group-append">
+          <input name="name" class="form-control p-2" style="border: 1px solid #f56c1f;" />
+          <button type="submit" class="input-group-append p-0 m-0" style="border: 1px solid #F56C1F;">
             <i style="line-height: 2rem; background-color: #F56C1F; padding: 5px 20px" class="feather-search text-white"></i>
-          </div>
+          </button>
         </div>
+      </form>
       </div>
       <div class="col-md-6 text-center d-none d-sm-block">
-        <img style="width: 200px" src="{% static 'img/biological.svg' %}" />
+        <img style="width: 264px" src="{% static 'img/biological.svg' %}" />
       </div>
     </div>
   </div>
