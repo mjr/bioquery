@@ -31,6 +31,13 @@ class ReferenceDB:
 
         return [Reference(*reference_tuple) for reference_tuple in row]
 
+    @staticmethod
+    def delete(**kwargs):
+        from .models import Reference
+
+        with connection.cursor() as cursor:
+            cursor.execute(f'DELETE FROM "core_reference" WHERE {get_where("core_reference", kwargs)}')
+
 
 class CategoryDB:
     @staticmethod

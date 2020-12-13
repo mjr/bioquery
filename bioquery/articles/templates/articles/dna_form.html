@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Novo artigo - BioQuery{% endblock title %}
+
+{% block content %}
+<div class="content-wrap py-160">
+  <div class="container isotope">
+    <h1 class="h2 mb-0">Novo DNA</h1>
+    <form method="POST" action="." enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="row gh-1 gv-2">
+        <div class="col-12" style="transform: translateY(0px); transition-duration: 400ms; opacity: 1;">
+          {{ form.name.errors }}
+          {{ form.name.label_tag }}
+          {{ form.name }}
+        </div>
+        <div class="col-12" style="transform: translateY(0px); transition-duration: 400ms; opacity: 1;">
+          {{ form.sequence.errors }}
+          {{ form.sequence.label_tag }}
+          {{ form.sequence }}
+        </div>
+
+        <hr class="mt-30 width-70px" />
+   
+        <div class="col-12" style="transform: translateY(0px); transition-duration: 400ms; opacity: 1;">
+          <button class="btn btn-dark btn-with-ball mt-20" type="submit" name="button">enviar!<span class="btn-ball"></span></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock content %}

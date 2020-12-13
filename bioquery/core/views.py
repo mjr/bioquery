@@ -5,13 +5,13 @@ from bioquery.articles.models import Article
 
 
 def home(request):
-    query = request.GET.get('q', '')
+    query = request.GET.get("q", "")
     articles = []
     if query:
         articles = Article.objects_db.filter_by_title_and_content(query)
     else:
         articles = Article.objects_db.all()
-    return render(request, 'index.html', {'query': query, 'articles': articles})
+    return render(request, "index.html", {"query": query, "articles": articles})
 
 
 def pannel(request):
@@ -27,8 +27,4 @@ def new_post(request):
 
 
 def new_dna(request):
-    return render(request, "new_post.html")
-
-
-def new_reference(request):
     return render(request, "new_post.html")

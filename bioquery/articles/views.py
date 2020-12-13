@@ -2,10 +2,81 @@ from django.contrib.auth.decorators import login_required
 from django.forms import inlineformset_factory
 from django.shortcuts import redirect, render, resolve_url as r
 from django.db import transaction
-from bioquery.core.models import Category, Photo
+from bioquery.core.models import Category, Photo, Reference, DNA
 
-from .forms import ArticleForm, PhotoForm
+from .forms import ArticleForm, PhotoForm, ReferenceForm, DNAForm
 from .models import Article
+
+
+@login_required
+def dnas(request):
+    dnas = DNA.objects_db.all()
+    return render(
+        request,
+        "articles/dnas.html",
+        {"dnas": dnas},
+    )
+
+
+@login_required
+def new_dna(request):
+    if request.method == "POST":
+        form = DNAForm(request.POST)
+
+        if not form.is_valid():
+            return render(
+                request,
+                "articles/dna_form.html",
+                {"form": form},
+            )
+        dnas = form.save(commit=False)
+        dnas.user = request.user
+        dnas.save()
+        return redirect(r("articles:dnas"))
+    return render(
+        request,
+        "articles/dna_form.html",
+        {
+            "form": DNAForm(),
+        },
+    )
+
+
+@login_required
+def references(request):
+    references = Reference.objects_db.all()
+    return render(
+        request,
+        "articles/references.html",
+        {"references": references},
+    )
+
+
+@login_required
+def new_reference(request):
+    if request.method == "POST":
+        form = ReferenceForm(request.POST)
+
+        if not form.is_valid():
+            return render(
+                request,
+                "articles/reference_form.html",
+                {"form": form},
+            )
+        form.save()
+        return redirect(r("articles:references"))
+    return render(
+        request,
+        "articles/reference_form.html",
+        {
+            "form": ReferenceForm(),
+        },
+    )
+
+
+def delete_reference(request, id):
+    Reference.objects_db.delete(id=id)
+    return redirect(r("articles:references"))
 
 
 @login_required

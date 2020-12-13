@@ -6,6 +6,18 @@ from bioquery.core.models import Category, DNA, Photo, Reference
 from .models import Article
 
 
+class ReferenceForm(forms.ModelForm):
+    class Meta:
+        model = Reference
+        fields = ["name", "title", "date_access"]
+
+
+class DNAForm(forms.ModelForm):
+    class Meta:
+        model = DNA
+        fields = ["name", "sequence"]
+
+
 class ArticleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -13,9 +25,7 @@ class ArticleForm(forms.ModelForm):
             [(category.pk, category.name) for category in Category.objects_db.all()]
         )
         self.fields["dnas"].choices = tuple([(dna.pk, dna.name) for dna in DNA.objects_db.all()])
-        self.fields["photo"].choices = tuple(
-            [(photo.pk, photo.file) for photo in Photo.objects_db.all()]
-        )
+        self.fields["photo"].choices = tuple([(photo.pk, photo.file) for photo in Photo.objects_db.all()])
         self.fields["references"].choices = tuple(
             [(reference.pk, reference.name) for reference in Reference.objects_db.all()]
         )
@@ -45,12 +55,8 @@ class ArticleForm(forms.ModelForm):
         model = Article
         fields = ["title", "content"]
         widgets = {
-            "title": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "Digite o título"}
-            ),
-            "content": forms.Textarea(
-                attrs={"class": "form-control", "placeholder": "Digite o conteúdo"}
-            ),
+            "title": forms.TextInput(attrs={"class": "form-control", "placeholder": "Digite o título"}),
+            "content": forms.Textarea(attrs={"class": "form-control", "placeholder": "Digite o conteúdo"}),
         }
 
     def clean_title(self):
