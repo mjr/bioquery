@@ -51,6 +51,36 @@ class ArticleDB:
         }
 
     @staticmethod
+    def filter_all(**kwargs):
+        from .models import Article
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """SELECT "articles_article"."id", "articles_article"."title", "articles_article"."slug", "articles_article"."content", "auth_user"."username", "core_category"."name", "articles_article"."added_in", "core_photo"."file" FROM "articles_article"
+                INNER JOIN "core_photo" on "core_photo"."id"="articles_article"."photo_id"
+                INNER JOIN "core_category" on "core_category"."id"="articles_article"."category_id"
+                INNER JOIN "auth_user" on "auth_user"."id"="articles_article"."user_id"
+                WHERE %s
+                """
+                % get_where("articles_article", kwargs),
+            )
+            rows = cursor.fetchall()
+
+        return [
+            {
+                "id": row[0],
+                "title": row[1],
+                "slug": row[2],
+                "content": row[3],
+                "author": row[4],
+                "category": row[5],
+                "date": row[6],
+                "photo": row[7],
+            }
+            for row in rows
+        ]
+
+    @staticmethod
     def all():
         from .models import Article
 
@@ -96,6 +126,17 @@ class ArticleDB:
             }
             for row in rows
         ]
+
+    @staticmethod
+    def delete(article_slug, user_id):
+        from .models import Reference
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                DELETE FROM "articles_article" WHERE "articles_article"."slug"= '%s' and "articles_article"."user_id"=%s """
+                % (article_slug, user_id)
+            )
 
     @staticmethod
     def set_dnas(pk, fks):

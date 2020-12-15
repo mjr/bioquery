@@ -68,6 +68,9 @@ class Reference(models.Model):
     name = models.CharField("nome", max_length=255)
     title = models.CharField("título", max_length=255)
     date_access = models.DateTimeField("data do acesso")
+    user = models.ForeignKey(
+        "auth.User", verbose_name="usuário", on_delete=models.CASCADE, null=True, blank=True
+    )
 
     objects_db = ReferenceDB
 

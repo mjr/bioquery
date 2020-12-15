@@ -12,21 +12,22 @@
     </div>
     {% for dna in dnas %}
     <div class="row">
-      <div class="col-12 mt-3">
+      <div class="col-12 col-md-10 mt-3">
           <div class="card">
               <div class="card-horizontal">
                   <div class="card-body">
                       <h4 class="card-title">{{dna.name}}</h4>
                       <p class="card-text">{{dna.sequence}}</p>
                   </div>
-                  <div class="mr-auto">
-                    <a href="/articles/references/{{ref.id}}/delete/">Remover</a>
-                  </div>
               </div>
               <div class="card-footer">
                   <small class="text-muted">{{ref.date_access}}</small>
               </div>
           </div>
+      </div>
+      <div class="col-12 col-md-2">
+        <a href="/articles/dnas/{{dna.id}}/edit/">Editar</a>
+        <a href="/articles/dnas/{{dna.id}}/delete/">Remover</a>
       </div>
     </div>
     {% endfor %}

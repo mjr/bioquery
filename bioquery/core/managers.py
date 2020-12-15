@@ -38,24 +38,28 @@ class ReferenceDB:
         return [Reference(*reference_tuple) for reference_tuple in row]
 
     @staticmethod
-    def all():
+    def all(**kwargs):
         from .models import Reference
 
+        query = "WHERE " + get_where("core_reference", kwargs) if len(kwargs) > 0 else ""
         with connection.cursor() as cursor:
             cursor.execute(
-                'SELECT "core_reference"."id", "core_reference"."name", "core_reference"."title", "core_reference"."date_access" FROM "core_reference" ORDER BY "core_reference"."name" DESC'
+                'SELECT "core_reference"."id", "core_reference"."name", "core_reference"."title", "core_reference"."date_access" FROM "core_reference" %s ORDER BY "core_reference"."name" DESC'
+                % query
             )
             row = cursor.fetchall()
 
         return [Reference(*reference_tuple) for reference_tuple in row]
 
     @staticmethod
-    def delete(**kwargs):
+    def delete(reference_id, user_id):
         from .models import Reference
 
         with connection.cursor() as cursor:
             cursor.execute(
-                f'DELETE FROM "core_reference" WHERE {get_where("core_reference", kwargs)}'
+                """DELETE FROM "articles_article_references" WHERE "articles_article_references"."reference_id" = %s;
+                DELETE FROM "core_reference" WHERE "core_reference"."id" = %s and "core_reference"."user_id" = %s"""
+                % (reference_id, reference_id, user_id)
             )
 
 
@@ -123,16 +127,30 @@ class DNADB:
         return [DNA(*dna_tuple) for dna_tuple in row]
 
     @staticmethod
-    def all():
+    def all(**kwargs):
         from .models import DNA
 
+        query = "WHERE " + get_where("core_dna", kwargs) if len(kwargs) > 0 else ""
         with connection.cursor() as cursor:
             cursor.execute(
-                'SELECT "core_dna"."id", "core_dna"."name", "core_dna"."sequence" FROM "core_dna" ORDER BY "core_dna"."name" DESC'
+                'SELECT "core_dna"."id", "core_dna"."name", "core_dna"."sequence" FROM "core_dna" %s ORDER BY "core_dna"."name" DESC'
+                % query
             )
             row = cursor.fetchall()
 
         return [DNA(*dna_tuple) for dna_tuple in row]
+
+    @staticmethod
+    def delete(dna_id, user_id):
+        from .models import Reference
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+            DELETE FROM "articles_article_dnas" WHERE "articles_article_dnas"."dna_id" = %s;
+            DELETE FROM "core_dna" WHERE "core_dna"."id"= %s and "core_dna"."user_id"=%s """
+                % (dna_id, dna_id, user_id)
+            )
 
 
 class PhotoDB:

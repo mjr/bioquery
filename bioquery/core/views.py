@@ -1,11 +1,14 @@
 from django.db.models import Q
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 
 from bioquery.articles.models import Article
 
 
+@login_required
 def pannel(request):
-    return render(request, "pannel.html")
+    articles = Article.objects_db.filter_all(user_id=request.user.id)
+    return render(request, "pannel.html", {"articles": articles})
 
 
 def search(request):

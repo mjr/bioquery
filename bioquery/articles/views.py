@@ -9,8 +9,14 @@ from .models import Article
 
 
 @login_required
+def delete_dna(request, id):
+    DNA.objects_db.delete(id, request.user.id)
+    return redirect(r("articles:dnas"))
+
+
+@login_required
 def dnas(request):
-    dnas = DNA.objects_db.all()
+    dnas = DNA.objects_db.all(user_id=request.user.id)
     return render(
         request,
         "articles/dnas.html",
@@ -44,7 +50,7 @@ def new_dna(request):
 
 @login_required
 def references(request):
-    references = Reference.objects_db.all()
+    references = Reference.objects_db.all(user_id=request.user.id)
     return render(
         request,
         "articles/references.html",
@@ -63,7 +69,9 @@ def new_reference(request):
                 "articles/reference_form.html",
                 {"form": form},
             )
-        form.save()
+        dna = form.save(commit=False)
+        dna.user = request.user
+        dna.save()
         return redirect(r("articles:references"))
     return render(
         request,
@@ -74,8 +82,9 @@ def new_reference(request):
     )
 
 
+@login_required
 def delete_reference(request, id):
-    Reference.objects_db.delete(id=id)
+    Reference.objects_db.delete(id, request.user.id)
     return redirect(r("articles:references"))
 
 
@@ -83,10 +92,16 @@ def delete_reference(request, id):
 def new(request):
     if request.method == "POST":
         return create(request)
-
     return empty_form(request)
 
 
+@login_required
+def delete_article(request, slug):
+    Article.objects_db.delete(slug, request.user.id)
+    return redirect(r("pannel"))
+
+
+@login_required
 def empty_form(request):
     return render(
         request,
