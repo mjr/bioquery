@@ -169,7 +169,8 @@ def update_article(request, slug):
 
 @login_required
 def delete_article(request, slug):
-    Article.objects_db.delete(slug, request.user.id)
+    article = Article.objects_db.get_object_or_404(slug=slug)
+    Article.objects_db.delete(article.id, request.user.id)
     return redirect(r("pannel"))
 
 
@@ -179,14 +180,14 @@ def empty_form(request, data={}):
         request,
         "articles/article_form.html",
         {
-            "form": ArticleForm(initial=data),
+            "form": ArticleForm(initial=data, user=request.user),
             "photo_form": PhotoForm(),
         },
     )
 
 
 def create(request):
-    form = ArticleForm(request.POST)
+    form = ArticleForm(request.POST, user=request.user)
     photo_form = PhotoForm(request.POST, request.FILES)
 
     if not form.is_valid() or not photo_form.is_valid():

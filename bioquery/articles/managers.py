@@ -128,14 +128,16 @@ class ArticleDB:
         ]
 
     @staticmethod
-    def delete(article_slug, user_id):
+    def delete(article_id, user_id):
         from .models import Reference
 
         with connection.cursor() as cursor:
             cursor.execute(
                 """
-                DELETE FROM "articles_article" WHERE "articles_article"."slug"= '%s' and "articles_article"."user_id"=%s """
-                % (article_slug, user_id)
+                DELETE FROM "articles_article_references" WHERE "articles_article_references"."article_id" = %s;
+                DELETE FROM "articles_article_dnas" WHERE "articles_article_dnas"."article_id" = %s;
+                DELETE FROM "articles_article" WHERE "articles_article"."id"= '%s' and "articles_article"."user_id"=%s """
+                % (article_id, article_id, article_id, user_id)
             )
 
     @staticmethod

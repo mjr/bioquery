@@ -20,14 +20,23 @@ class DNAForm(forms.ModelForm):
 
 class ArticleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)
+
         self.fields["category"].choices = tuple(
             [(category.pk, category.name) for category in Category.objects_db.all()]
         )
-        self.fields["dnas"].choices = tuple([(dna.pk, dna.name) for dna in DNA.objects_db.all()])
-        self.fields["photo"].choices = tuple([(photo.pk, photo.file) for photo in Photo.objects_db.all()])
+        self.fields["dnas"].choices = tuple(
+            [(dna.pk, dna.name) for dna in DNA.objects_db.all(user_id=user.id)]
+        )
+        self.fields["photo"].choices = tuple(
+            [(photo.pk, photo.file) for photo in Photo.objects_db.all(user_id=user.id)]
+        )
         self.fields["references"].choices = tuple(
-            [(reference.pk, reference.name) for reference in Reference.objects_db.all()]
+            [
+                (reference.pk, reference.name)
+                for reference in Reference.objects_db.all(user_id=user.id)
+            ]
         )
 
     photo = forms.ChoiceField(
@@ -55,8 +64,12 @@ class ArticleForm(forms.ModelForm):
         model = Article
         fields = ["title", "content"]
         widgets = {
-            "title": forms.TextInput(attrs={"class": "form-control", "placeholder": "Digite o título"}),
-            "content": forms.Textarea(attrs={"class": "form-control", "placeholder": "Digite o conteúdo"}),
+            "title": forms.TextInput(
+                attrs={"class": "form-control", "placeholder": "Digite o título"}
+            ),
+            "content": forms.Textarea(
+                attrs={"class": "form-control", "placeholder": "Digite o conteúdo"}
+            ),
         }
 
     def clean_title(self):

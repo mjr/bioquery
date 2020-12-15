@@ -188,12 +188,14 @@ class PhotoDB:
         return Photo(*row)
 
     @staticmethod
-    def all():
+    def all(**kwargs):
         from .models import Photo
 
+        query = "WHERE " + get_where("core_photo", kwargs) if len(kwargs) > 0 else ""
         with connection.cursor() as cursor:
             cursor.execute(
-                'SELECT "core_photo"."id", "core_photo"."user_id", "core_photo"."file" FROM "core_photo" ORDER BY "core_photo"."id" DESC'
+                'SELECT "core_photo"."id", "core_photo"."user_id", "core_photo"."file" FROM "core_photo" %s ORDER BY "core_photo"."id" DESC'
+                % query
             )
             row = cursor.fetchall()
 
