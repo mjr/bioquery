@@ -5,10 +5,20 @@
 {% block content %}
 <div class="content-wrap py-160">
   <div class="container isotope">
-    <div class="row justify-content-center">
-      <div class="col-12 text-center mb-60" style="transition-duration: 700ms; opacity: 1; transform: translateY(0px);">
-        <img src="/media/{{ article.photo }}" width="300px" />
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
+    {% endfor %}
+    <div class="row justify-content-center">
+      {% if article.photo %}
+        <div class="col-12 text-center mb-60" style="transition-duration: 700ms; opacity: 1; transform: translateY(0px);">
+          <img src="/media/{{ article.photo }}" width="300px" />
+        </div>
+      {% endif %}
       <div class="col-12 col-lg-10">
         <div class="row">
           <div class="col-12 mb-20">
@@ -37,7 +47,89 @@
             </div>
             {% endfor %}
           </div>
-          
+        </div>
+      </div>
+      <div class="row justify-content-center gh-1 mt-60 mb-100">
+        <div class="col-12 col-lg-6 text-center">
+          <svg
+            class="mb-30"
+            width="38"
+            height="24"
+            viewBox="0 0 38 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 24L10.1466 0H18.801L13.4293 24H0ZM19.199 24L29.3455 0H38L32.5288 24H19.199Z"
+              fill="currentColor"
+            ></path>
+          </svg>
+          <blockquote class="mt-6 mb-60">Deixe um comentário.</blockquote>
+        </div>
+        {% if user.is_authenticated %}
+        <div
+          class="col-12 col-lg-8"
+          style="transform: translateY(0px); transition-duration: 400ms; opacity: 1"
+        >
+          <form method="POST" action=".">
+            {% csrf_token %}
+            <textarea
+              name="content"
+              class="form-control"
+              rows="1"
+              placeholder="Escreva um comentário..."
+            ></textarea>
+            <button
+              type="submit"
+              class="btn btn-dark btn-with-ball mt-20"
+            >
+              enviar<span class="btn-ball" style="transform: translateY(0px)"></span>
+            </button>
+          </form>
+        </div>
+        {% else %}
+        <div class="col-12 col-lg-8 text-center">
+          <a class="btn btn-dark btn-with-ball" href="{% url 'account_login' %}?next={{ request.path }}">
+            Faça login para adicionar um comentário!
+          </a>
+        </div>
+        {% endif %}
+        <div class="col-12 col-lg-8 text-center">
+          <div class="accordion mt-40 pt-5" id="accordionAbout">
+            {% for comment in comments %}
+            <div class="accordion-item">
+              <div class="d-flex justify-content-between h5">
+                <span>🔥 {{ comment.user }}</span>
+                <span><small class="text-muted" style="font-size: 60%;">{{ comment.created_at }}</small></span>
+              </div>
+              <div
+                id="collapseDesign"
+                class="collapse show"
+                data-parent="#accordionAbout"
+              >
+                <div class="collapse-content px-0">
+                  <p class="mb-0 text-left font-size-16">
+                    {{ comment.content }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            {% empty %}
+            <div class="accordion-item">
+              <div
+                id="collapseDesign"
+                class="collapse show"
+                data-parent="#accordionAbout"
+              >
+                <div class="collapse-content px-0">
+                  <p class="mb-0 font-size-16 text-secondary">
+                    Ainda não há comentários...
+                  </p>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>

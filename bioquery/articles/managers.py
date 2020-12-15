@@ -45,15 +45,7 @@ class ArticleDB:
         from .models import Article
 
         with connection.cursor() as cursor:
-            cursor.execute(
-                """SELECT "articles_article"."id", "articles_article"."title", "articles_article"."slug", "articles_article"."content", "auth_user"."username", "core_category"."name", "articles_article"."added_in", "core_photo"."file" FROM "articles_article"
-                INNER JOIN "core_photo" on "core_photo"."id"="articles_article"."photo_id"
-                INNER JOIN "core_category" on "core_category"."id"="articles_article"."category_id"
-                INNER JOIN "auth_user" on "auth_user"."id"="articles_article"."user_id"
-                WHERE %s
-                """
-                % get_where("articles_article", kwargs),
-            )
+            cursor.execute(f'SELECT "articles_article"."id", "articles_article"."title", "articles_article"."slug", "articles_article"."content", "auth_user"."username", "core_category"."name", "articles_article"."added_in", "core_photo"."file" FROM "articles_article" LEFT JOIN "core_photo" on "core_photo"."id"="articles_article"."photo_id" INNER JOIN "core_category" on "core_category"."id"="articles_article"."category_id" INNER JOIN "auth_user" on "auth_user"."id"="articles_article"."user_id" WHERE {get_where("articles_article", kwargs)}')
             row = cursor.fetchone()
 
         if row is None:

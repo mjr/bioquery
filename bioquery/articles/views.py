@@ -1,11 +1,12 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.forms import inlineformset_factory
 from django.shortcuts import redirect, render, resolve_url as r
 from django.db import transaction
-from bioquery.core.models import Category, Photo, Reference, DNA
+from bioquery.core.models import Category, Photo, Reference, DNA, Comment
 from django.utils.text import slugify
 
-from .forms import ArticleForm, PhotoForm, ReferenceForm, DNAForm
+from .forms import ArticleForm, PhotoForm, ReferenceForm, DNAForm, CommentForm
 from .models import Article
 
 
@@ -267,11 +268,54 @@ def create(request):
 
 
 def detail(request, slug):
+    if request.method == "POST":
+        return add_comment(request, slug)
+
+    return view_article(request, slug)
+
+def view_article(request, slug):
     article = Article.objects_db.get_complex_or_404(slug=slug)
     references = Reference.objects_db.from_article(article["id"])
     dnas = DNA.objects_db.from_article(article["id"])
+    comments = Comment.objects_db.filter_by_article__pk(article["id"])
     return render(
         request,
         "articles/article_detail.html",
-        {"article": article, "references": references, "dnas": dnas},
+        {
+            "article": article,
+            "references": references,
+            "dnas": dnas,
+            "comments": comments,
+            "comment_form": CommentForm()
+        },
     )
+
+
+@login_required
+def add_comment(request, slug):
+    article = Article.objects_db.get_complex_or_404(slug=slug)
+
+    comment_form = CommentForm(request.POST)
+    if not comment_form.is_valid():
+        references = Reference.objects_db.from_article(article["id"])
+        dnas = DNA.objects_db.from_article(article["id"])
+        comments = Comment.objects_db.filter_by_article__pk(article["id"])
+
+        return render(
+            request,
+            "articles/article_detail.html",
+            {
+                "article": article,
+                "references": references,
+                "dnas": dnas,
+                "comments": comments,
+                "comment_form": comment_form
+            },
+        )
+
+    comment = comment_form.save(commit=False)
+    comment.article = Article(id=article["id"])
+    comment.user = request.user
+    comment.save()
+    messages.success(request, 'Comentário adicionado com sucesso.')
+    return redirect(r("articles:detail", slug=article["slug"]))

@@ -1,6 +1,7 @@
 from django.db import models
+from django.utils import timezone
 
-from .managers import CategoryDB, DNADB, PhotoDB, ReferenceDB
+from .managers import CategoryDB, DNADB, PhotoDB, ReferenceDB, CommentDB
 
 
 class Category(models.Model):
@@ -89,6 +90,8 @@ class Comment(models.Model):
     user = models.ForeignKey("auth.User", verbose_name="usuário", on_delete=models.CASCADE)
     created_at = models.DateTimeField("criado em", auto_now_add=True)
 
+    objects_db = CommentDB
+
     class Meta:
         verbose_name_plural = "comentários"
         verbose_name = "comentário"
@@ -96,3 +99,23 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.content
+
+    def save_db(self):
+        from django.db import connection
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                'INSERT INTO "core_comment" ("article_id", "content", "user_id", "created_at") VALUES (%s, %s, %s, %s) RETURNING id',
+                [
+                    self.article.pk,
+                    self.content,
+                    self.user.pk,
+                    self.created_at,
+                ],
+            )
+
+            return cursor.fetchone()[0]
+
+    def save(self):
+        self.created_at = timezone.now()
+        self.pk = self.save_db()

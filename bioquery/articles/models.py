@@ -58,6 +58,7 @@ class Article(models.Model):
             return cursor.fetchone()[0]
 
     def save(self):
-        self.slug = slugify(self.title)
+        slug = slugify(self.title)
+        self.slug = slug[:50] if len(slug) > 50 else slug
         self.added_in = timezone.now()
         self.pk = self.save_db()

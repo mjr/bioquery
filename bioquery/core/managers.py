@@ -248,3 +248,20 @@ class PhotoDB:
             row = cursor.fetchall()
 
         return [Photo(*photo_tuple) for photo_tuple in row]
+
+
+class CommentDB:
+    @staticmethod
+    def filter_by_article__pk(pk):
+        from .models import Comment
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                f'SELECT "core_comment"."id", "core_comment"."article_id", "core_comment"."content", "core_comment"."user_id", "core_comment"."created_at" FROM "core_comment" WHERE "core_comment"."article_id" = {pk} ORDER BY "core_comment"."created_at" DESC LIMIT 21'
+            )
+            rows = cursor.fetchall()
+
+        if not rows:
+            return None
+
+        return [Comment(*comment_tuple) for comment_tuple in rows]

@@ -1,9 +1,15 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from bioquery.core.models import Category, DNA, Photo, Reference
+from bioquery.core.models import Category, DNA, Photo, Reference, Comment
 
 from .models import Article
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ["content"]
 
 
 class ReferenceForm(forms.ModelForm):
