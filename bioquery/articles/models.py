@@ -43,7 +43,7 @@ class Article(models.Model):
 
         with connection.cursor() as cursor:
             cursor.execute(
-                'INSERT INTO "articles_article" ("title", "slug", "content", "user_id", "category_id", "photo_id", "added_in") VALUES (%s, %s, %s, %s, %s, %s, %s)',
+                'INSERT INTO "articles_article" ("title", "slug", "content", "user_id", "category_id", "photo_id", "added_in") VALUES (%s, %s, %s, %s, %s, %s, %s) RETURNING id',
                 [
                     self.title,
                     self.slug,
@@ -55,7 +55,7 @@ class Article(models.Model):
                 ],
             )
 
-            return cursor.lastrowid
+            return cursor.fetchone()[0]
 
     def save(self):
         self.slug = slugify(self.title)

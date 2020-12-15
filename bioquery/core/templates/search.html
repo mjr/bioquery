@@ -1,30 +1,43 @@
 {% extends "base.html" %} {% block content %}
-<div class="container-fluid " style="min-height: calc(100vh - 94px)">
-  <div class="row justify-content-center pt-60 pb-60 bg-orange">
+<div class="container-fluid" style="min-height: calc(100vh - 94px)">
+  <div class="row justify-content-center pt-60 pb-60 bg-orange mb-20">
     <div class="col-md-8">
-        <form>
-            <h3>Pesquisar</h3>
-            <input name="name" placeholder="a" class="form-control bg-white rounded-sm p-4"/>
-        </form>
+      <form>
+        <h3>Pesquisar</h3>
+        <input
+          name="q"
+          placeholder="Pesquise aqui..."
+          class="form-control bg-white rounded-sm p-4"
+        />
+      </form>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12 mt-3">
+  {% if articles|length == 0 %}
+  <div class="alert-info p-20">Nenhum resultado encontrado.</div>
+  {% endif %}
+  {% for article in articles %}
+  <a class="w-100" href="/articles/{{article.slug}}">
+    <div class="row mb-20">
+      <div class="col-12 col-md-3">
+        <img class="img-fluid" src="/media/{{article.photo}}" alt="image" />
+      </div>
+      <div class="col-md-9 mt-3">
         <div class="card">
-            <div class="card-horizontal">
-                <div class="img-square-wrapper">
-                    <img class="" src="http://via.placeholder.com/300x180" alt="Card image cap">
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title">Card title</h4>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
+          <div class="card-horizontal">
+            <div class="card-body">
+              <h4 class="card-title">{{article.title}}</h4>
+              <p class="card-text">{{article.content|truncatechars:300}}</p>
             </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Categoria: {{article.category}}</small></br>
+            <small class="text-muted">Autor: {{article.author}}</small></br>
+            <small class="text-muted">{{article.date}}</small>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </a>
+  {% endfor %}
 </div>
 {% endblock content %}

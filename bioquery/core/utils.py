@@ -1,20 +1,20 @@
 def get_where(table_name, kwargs):
     if len(kwargs) == 0:
-        raise Exception('Expected an argument')
+        raise Exception("Expected an argument")
 
     if len(kwargs) == 1:
         for key, value in kwargs.items():
-            key_ = 'id' if key == 'pk' else key
-            value_ = f'{value}' if type(value) == str else value
-            return f'{table_name}."{key_}" = "{value_}"'
+            key_ = "id" if key == "pk" else key
+            value_ = f"{value}" if type(value) == str else value
+            return f"{table_name}.\"{key_}\" = '{value_}'"
 
     list_ = []
     for key, value in kwargs.items():
-        key_ = 'id' if key == 'pk' else key
-        value_ = f'{value}' if type(value) == str else value
-        list_.append(f'{table_name}."{key_}" = "{value_}"')
+        key_ = "id" if key == "pk" else key
+        value_ = f"{value}" if type(value) == str else value
+        list_.append(f"{table_name}.\"{key_}\" = '{value_}'")
 
-    return ' AND '.join(list_)
+    return " AND ".join(list_)
 
 
 def get_set(pk, fks):

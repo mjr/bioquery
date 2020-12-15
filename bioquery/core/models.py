@@ -53,11 +53,11 @@ class Photo(models.Model):
 
         with connection.cursor() as cursor:
             cursor.execute(
-                'INSERT INTO "core_photo" ("user_id", "file") VALUES (%s, %s)',
+                'INSERT INTO "core_photo" ("user_id", "file") VALUES (%s, %s) RETURNING id',
                 [self.user.pk, self.file.name],
             )
 
-            return cursor.lastrowid
+            return cursor.fetchone()[0]
 
     def save(self):
         self.file.save(self.file.name, self.file.file, save=False)
