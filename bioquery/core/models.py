@@ -20,7 +20,7 @@ class Category(models.Model):
 
 class DNA(models.Model):
     name = models.CharField("nome", max_length=255)
-    sequence = models.CharField("sequência", max_length=255)
+    sequence = models.TextField("sequência")
     user = models.ForeignKey("auth.User", verbose_name="usuário", on_delete=models.CASCADE)
 
     objects_db = DNADB

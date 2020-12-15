@@ -15,6 +15,30 @@ def delete_dna(request, id):
 
 
 @login_required
+def edit_dna(request, id):
+    dna = DNA.objects_db.get(id=id)
+    if request.method == "POST":
+        form = DNAForm(request.POST)
+
+        if not form.is_valid():
+            return render(
+                request,
+                "articles/dna_form.html",
+                {"form": form},
+            )
+
+        DNA.objects_db.update(dna.id, form.cleaned_data["name"], form.cleaned_data["sequence"])
+        return redirect(r("articles:dnas"))
+    return render(
+        request,
+        "articles/dna_form.html",
+        {
+            "form": DNAForm(initial={"name": dna.name, "sequence": dna.sequence}),
+        },
+    )
+
+
+@login_required
 def dnas(request):
     dnas = DNA.objects_db.all(user_id=request.user.id)
     return render(
@@ -96,18 +120,31 @@ def new(request):
 
 
 @login_required
+def update_article(request, slug):
+    article = Article.objects_db.get_object_or_404(slug=slug)
+    return empty_form(
+        request,
+        {
+            "title": article.title,
+            "content": article.content,
+            "category": article.category_id,
+        },
+    )
+
+
+@login_required
 def delete_article(request, slug):
     Article.objects_db.delete(slug, request.user.id)
     return redirect(r("pannel"))
 
 
 @login_required
-def empty_form(request):
+def empty_form(request, data={}):
     return render(
         request,
         "articles/article_form.html",
         {
-            "form": ArticleForm(),
+            "form": ArticleForm(initial=data),
             "photo_form": PhotoForm(),
         },
     )

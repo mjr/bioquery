@@ -152,6 +152,15 @@ class DNADB:
                 % (dna_id, dna_id, user_id)
             )
 
+    def update(dna_id, name, sequence):
+        from .models import Reference
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """UPDATE "core_dna" SET "name" = '%s', "sequence" = '%s' WHERE "core_dna"."id" = %s"""
+                % (name, sequence, dna_id)
+            )
+
 
 class PhotoDB:
     @staticmethod
