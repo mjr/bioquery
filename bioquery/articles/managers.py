@@ -11,7 +11,7 @@ class ArticleDB:
 
         with connection.cursor() as cursor:
             cursor.execute(
-                f'SELECT "articles_article"."id", "articles_article"."title", "articles_article"."slug", "articles_article"."content", "articles_article"."user_id", "articles_article"."category_id", "articles_article"."added_in" FROM "articles_article" WHERE {get_where("articles_article", kwargs)}'
+                f'SELECT "articles_article"."id", "articles_article"."title", "articles_article"."slug", "articles_article"."content", "articles_article"."user_id", "articles_article"."category_id", "articles_article"."added_in", "articles_article"."photo_id" FROM "articles_article" WHERE {get_where("articles_article", kwargs)}'
             )
             row = cursor.fetchone()
 
@@ -19,6 +19,26 @@ class ArticleDB:
             raise Http404
 
         return Article(*row)
+
+    @staticmethod
+    def update(article_id, title, slug, content, category_id):
+        from .models import Reference
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """UPDATE "articles_article" SET "title" = '%s', "slug" = '%s', "content" = '%s', "category_id" = '%s' WHERE "articles_article"."id" = %s"""
+                % (title, slug, content, category_id, article_id)
+            )
+
+    @staticmethod
+    def update_photo(article_id, photo_id):
+        from .models import Reference
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """UPDATE "articles_article" SET "photo_id" = '%s' WHERE "articles_article"."id" = %s"""
+                % (photo_id, article_id)
+            )
 
     @staticmethod
     def get_complex_or_404(**kwargs):
@@ -142,20 +162,26 @@ class ArticleDB:
 
     @staticmethod
     def set_dnas(pk, fks):
-        if not fks:
-            return
 
         with connection.cursor() as cursor:
-            cursor.execute(
-                f'INSERT INTO "articles_article_dnas" ("article_id", "dna_id") {get_set(pk, fks)}'
-            )
+            cursor.execute("""DELETE FROM "articles_article_dnas" WHERE "article_id" = %s;""" % pk)
+            if fks:
+                cursor.execute(
+                    """
+                    INSERT INTO "articles_article_dnas" ("article_id", "dna_id") %s"""
+                    % (get_set(pk, fks))
+                )
 
     @staticmethod
     def set_references(pk, fks):
-        if not fks:
-            return
 
         with connection.cursor() as cursor:
             cursor.execute(
-                f'INSERT INTO "articles_article_references" ("article_id", "reference_id") {get_set(pk, fks)}'
+                """DELETE FROM "articles_article_references" WHERE "article_id" = %s;""" % pk
             )
+            if fks:
+                cursor.execute(
+                    """
+                    INSERT INTO "articles_article_references" ("article_id", "reference_id") %s"""
+                    % (get_set(pk, fks))
+                )

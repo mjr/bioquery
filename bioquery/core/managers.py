@@ -52,6 +52,21 @@ class ReferenceDB:
         return [Reference(*reference_tuple) for reference_tuple in row]
 
     @staticmethod
+    def all_from_article(article_id):
+        from .models import Reference
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """SELECT "core_reference"."id", "core_reference"."name", "core_reference"."title", "core_reference"."date_access" FROM "core_reference"
+                INNER JOIN "articles_article_references" on "articles_article_references"."article_id" = '%s' AND "articles_article_references"."reference_id"="core_reference"."id"
+                ORDER BY "core_reference"."name" DESC"""
+                % article_id
+            )
+            row = cursor.fetchall()
+
+        return [Reference(*reference_tuple) for reference_tuple in row]
+
+    @staticmethod
     def delete(reference_id, user_id):
         from .models import Reference
 
@@ -150,6 +165,21 @@ class DNADB:
         return [DNA(*dna_tuple) for dna_tuple in row]
 
     @staticmethod
+    def all_from_article(article_id):
+        from .models import DNA
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """SELECT "core_dna"."id", "core_dna"."name", "core_dna"."sequence" FROM "core_dna"
+                INNER JOIN "articles_article_dnas" on "articles_article_dnas"."article_id" = '%s' and "articles_article_dnas"."dna_id"="core_dna"."id"
+                ORDER BY "core_dna"."name" DESC"""
+                % article_id
+            )
+            row = cursor.fetchall()
+
+        return [DNA(*dna_tuple) for dna_tuple in row]
+
+    @staticmethod
     def delete(dna_id, user_id):
         from .models import Reference
 
@@ -179,6 +209,24 @@ class PhotoDB:
         with connection.cursor() as cursor:
             cursor.execute(
                 f'SELECT "core_photo"."id", "core_photo"."user_id", "core_photo"."file" FROM "core_photo" WHERE {get_where("core_photo", kwargs)}'
+            )
+            row = cursor.fetchone()
+
+        if row is None:
+            return None
+
+        return Photo(*row)
+
+    @staticmethod
+    def get_from_article(article_id):
+        from .models import Photo
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """SELECT "core_photo"."id", "core_photo"."user_id", "core_photo"."file" FROM "core_photo"
+                INNER JOIN "articles_article" ON "articles_article"."photo_id"="core_photo"."id" AND "articles_article"."id"='%s'
+                """
+                % article_id
             )
             row = cursor.fetchone()
 

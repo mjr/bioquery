@@ -3,6 +3,7 @@ from django.forms import inlineformset_factory
 from django.shortcuts import redirect, render, resolve_url as r
 from django.db import transaction
 from bioquery.core.models import Category, Photo, Reference, DNA
+from django.utils.text import slugify
 
 from .forms import ArticleForm, PhotoForm, ReferenceForm, DNAForm
 from .models import Article
@@ -157,12 +158,21 @@ def new(request):
 @login_required
 def update_article(request, slug):
     article = Article.objects_db.get_object_or_404(slug=slug)
+    if request.method == "POST":
+        return update(article.id, request)
+    dnas = DNA.objects_db.all_from_article(article.id)
+    references = Reference.objects_db.all_from_article(article.id)
+    photo = Photo.objects_db.get_from_article(article.id)
+
     return empty_form(
         request,
         {
             "title": article.title,
             "content": article.content,
             "category": article.category_id,
+            "photo": photo.id,
+            "references": [reference.id for reference in references],
+            "dnas": [dna.id for dna in dnas],
         },
     )
 
@@ -184,6 +194,43 @@ def empty_form(request, data={}):
             "photo_form": PhotoForm(),
         },
     )
+
+
+def update(article_id, request):
+    form = ArticleForm(request.POST, user=request.user)
+    photo_form = PhotoForm(request.POST, request.FILES)
+
+    if not form.is_valid() or not photo_form.is_valid():
+        return render(
+            request,
+            "articles/article_form.html",
+            {"form": form, "photo_form": photo_form},
+        )
+
+    with transaction.atomic():
+        photo = None
+        if photo_form["file"].data:
+            photo = photo_form.save(commit=False)
+            photo.user = request.user
+            photo.save()
+        elif form["photo"].data:
+            photo = Photo.objects_db.get(id=form["photo"].data)
+
+        Article.objects_db.update(
+            article_id,
+            form.cleaned_data["title"],
+            slugify(form.cleaned_data["title"]),
+            form.cleaned_data["content"],
+            form.cleaned_data["category"],
+        )
+
+        if photo:
+            Article.objects_db.update_photo(article_id, photo.id)
+
+        Article.objects_db.set_dnas(article_id, form["dnas"].data)
+        Article.objects_db.set_references(article_id, form["references"].data)
+
+    return redirect(r("pannel"))
 
 
 def create(request):
