@@ -132,5 +132,11 @@ def create(request):
 
 
 def detail(request, slug):
-    article = Article.objects_db.get_object_or_404(slug=slug)
-    return render(request, "articles/article_detail.html", {"article": article})
+    article = Article.objects_db.get_complex_or_404(slug=slug)
+    references = Reference.objects_db.from_article(article["id"])
+    dnas = DNA.objects_db.from_article(article["id"])
+    return render(
+        request,
+        "articles/article_detail.html",
+        {"article": article, "references": references, "dnas": dnas},
+    )

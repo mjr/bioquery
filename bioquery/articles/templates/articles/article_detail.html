@@ -6,6 +6,9 @@
 <div class="content-wrap py-160">
   <div class="container isotope">
     <div class="row justify-content-center">
+      <div class="col-12 text-center mb-60" style="transition-duration: 700ms; opacity: 1; transform: translateY(0px);">
+        <img src="/media/{{ article.photo }}" width="300px" />
+    </div>
       <div class="col-12 col-lg-10">
         <div class="row">
           <div class="col-12 mb-20">
@@ -16,15 +19,25 @@
             <p class="mb-3">{{ article.content }}</p>
           </div>
           <div class="col-12" style="transition-duration: 700ms; opacity: 1; transform: translateY(0px);">
-            {% for dna in article.dnas.all %}
-              <p>{{ dna.sequence }}</p>
+            <h3 class="mt-60">Referências</h3>
+            {% for ref in references %}
+              <div class="mb-30">
+                <p class="m-0">{{ ref.name }}</p>
+                <p class="m-0">{{ ref.title }}</p>
+                <p class="m-0">{{ ref.date_access }}</p>
+              </div>
             {% endfor %}
           </div>
           <div class="col-12" style="transition-duration: 700ms; opacity: 1; transform: translateY(0px);">
-            {% for photo in article.photos.all %}
-              <img src="{{ photo.file.url }}" width="300px" />
+            <h3>DNA's</h3>
+            {% for dna in dnas %}
+            <div class="mb-30">
+              <p class="m-0">{{ dna.name }}</p>
+              <p class="m-0">{{ dna.sequence }}</p>
+            </div>
             {% endfor %}
           </div>
+          
         </div>
       </div>
     </div>

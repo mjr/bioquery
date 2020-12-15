@@ -20,6 +20,24 @@ class ReferenceDB:
         return Reference(*row)
 
     @staticmethod
+    def from_article(article_id):
+        from .models import Reference
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """SELECT "core_reference"."id", "core_reference"."name", "core_reference"."title", "core_reference"."date_access" FROM "core_reference"
+                INNER JOIN "articles_article_references" on "core_reference"."id"="articles_article_references"."reference_id" and "articles_article_references"."article_id"=%s
+                """
+                % article_id
+            )
+            row = cursor.fetchall()
+
+        if row is None:
+            return None
+
+        return [Reference(*reference_tuple) for reference_tuple in row]
+
+    @staticmethod
     def all():
         from .models import Reference
 
@@ -36,7 +54,9 @@ class ReferenceDB:
         from .models import Reference
 
         with connection.cursor() as cursor:
-            cursor.execute(f'DELETE FROM "core_reference" WHERE {get_where("core_reference", kwargs)}')
+            cursor.execute(
+                f'DELETE FROM "core_reference" WHERE {get_where("core_reference", kwargs)}'
+            )
 
 
 class CategoryDB:
@@ -83,6 +103,24 @@ class DNADB:
             return None
 
         return DNA(*row)
+
+    @staticmethod
+    def from_article(article_id):
+        from .models import DNA
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """SELECT "core_dna"."id", "core_dna"."name", "core_dna"."sequence" FROM "core_dna"
+                LEFT JOIN "articles_article_dnas" on "core_dna"."id"="articles_article_dnas"."dna_id" and "articles_article_dnas"."article_id"=%s
+                """
+                % article_id
+            )
+            row = cursor.fetchall()
+
+        if row is None:
+            return None
+
+        return [DNA(*dna_tuple) for dna_tuple in row]
 
     @staticmethod
     def all():
