@@ -39,6 +39,41 @@ def edit_dna(request, id):
 
 
 @login_required
+def edit_reference(request, id):
+    reference = Reference.objects_db.get(id=id)
+    if request.method == "POST":
+        form = ReferenceForm(request.POST)
+
+        if not form.is_valid():
+            return render(
+                request,
+                "articles/reference_form.html",
+                {"form": form},
+            )
+
+        Reference.objects_db.update(
+            reference.id,
+            form.cleaned_data["name"],
+            form.cleaned_data["title"],
+            form.cleaned_data["date_access"],
+        )
+        return redirect(r("articles:references"))
+    return render(
+        request,
+        "articles/reference_form.html",
+        {
+            "form": ReferenceForm(
+                initial={
+                    "name": reference.name,
+                    "title": reference.title,
+                    "date_access": reference.date_access,
+                }
+            ),
+        },
+    )
+
+
+@login_required
 def dnas(request):
     dnas = DNA.objects_db.all(user_id=request.user.id)
     return render(

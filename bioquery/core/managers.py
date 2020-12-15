@@ -62,6 +62,15 @@ class ReferenceDB:
                 % (reference_id, reference_id, user_id)
             )
 
+    def update(dna_id, name, title, date_access):
+        from .models import Reference
+
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """UPDATE "core_reference" SET "name" = '%s', "title" = '%s', "date_access" = '%s' WHERE "core_reference"."id" = %s"""
+                % (name, title, date_access, dna_id)
+            )
+
 
 class CategoryDB:
     @staticmethod

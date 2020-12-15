@@ -12,6 +12,7 @@ from .views import (
     delete_dna,
     delete_article,
     update_article,
+    edit_reference,
 )
 
 
@@ -25,6 +26,7 @@ urlpatterns = [
     path("references/", references, name="references"),
     path("references/new/", new_reference, name="new_reference"),
     path("references/<int:id>/delete/", delete_reference, name="delete_reference"),
+    path("references/<int:id>/edit/", edit_reference, name="edit_reference"),
     path("dnas/<int:id>/delete/", delete_dna, name="delete_dnas"),
     path("<str:slug>/", detail, name="detail"),
     path("<str:slug>/delete/", delete_article, name="delete_article"),
