@@ -259,11 +259,10 @@ def create(request):
         article.user = request.user
         if photo:
             article.photo = photo
-        article.save()
+        article.save_db()
 
         Article.objects_db.set_dnas(article.pk, form["dnas"].data)
         Article.objects_db.set_references(article.pk, form["references"].data)
-
     return redirect(r("articles:detail", slug=article.slug))
 
 

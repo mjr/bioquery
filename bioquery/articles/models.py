@@ -38,7 +38,7 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
-    def save_db(self):
+    def save_sql(self):
         from django.db import connection
 
         with connection.cursor() as cursor:
@@ -57,8 +57,8 @@ class Article(models.Model):
 
             return cursor.fetchone()[0]
 
-    def save(self):
+    def save_db(self):
         slug = slugify(self.title)
         self.slug = slug[:50] if len(slug) > 50 else slug
         self.added_in = timezone.now()
-        self.pk = self.save_db()
+        self.pk = self.save_sql()

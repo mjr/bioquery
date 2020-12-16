@@ -94,6 +94,12 @@ class ArticleForm(forms.ModelForm):
 
         return self.cleaned_data
 
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if commit:
+            instance.save_db()
+        return instance
+
 
 class PhotoForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
