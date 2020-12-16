@@ -139,7 +139,7 @@ class DNADB:
         with connection.cursor() as cursor:
             cursor.execute(
                 """SELECT "core_dna"."id", "core_dna"."name", "core_dna"."sequence" FROM "core_dna"
-                LEFT JOIN "articles_article_dnas" on "core_dna"."id"="articles_article_dnas"."dna_id" and "articles_article_dnas"."article_id"=%s
+                INNER JOIN "articles_article_dnas" on "core_dna"."id"="articles_article_dnas"."dna_id" and "articles_article_dnas"."article_id"=%s
                 """
                 % article_id
             )

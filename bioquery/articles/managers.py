@@ -45,7 +45,9 @@ class ArticleDB:
         from .models import Article
 
         with connection.cursor() as cursor:
-            cursor.execute(f'SELECT "articles_article"."id", "articles_article"."title", "articles_article"."slug", "articles_article"."content", "auth_user"."username", "core_category"."name", "articles_article"."added_in", "core_photo"."file" FROM "articles_article" LEFT JOIN "core_photo" on "core_photo"."id"="articles_article"."photo_id" INNER JOIN "core_category" on "core_category"."id"="articles_article"."category_id" INNER JOIN "auth_user" on "auth_user"."id"="articles_article"."user_id" WHERE {get_where("articles_article", kwargs)}')
+            cursor.execute(
+                f'SELECT "articles_article"."id", "articles_article"."title", "articles_article"."slug", "articles_article"."content", "auth_user"."username", "core_category"."name", "articles_article"."added_in", "core_photo"."file" FROM "articles_article" LEFT JOIN "core_photo" on "core_photo"."id"="articles_article"."photo_id" INNER JOIN "core_category" on "core_category"."id"="articles_article"."category_id" INNER JOIN "auth_user" on "auth_user"."id"="articles_article"."user_id" WHERE {get_where("articles_article", kwargs)}'
+            )
             row = cursor.fetchone()
 
         if row is None:
@@ -118,8 +120,8 @@ class ArticleDB:
                 LEFT JOIN "core_reference" on "core_reference"."id"="articles_article_references"."reference_id"
                 LEFT JOIN "articles_article_dnas" on "articles_article_dnas"."article_id"="articles_article"."id"
                 LEFT JOIN "core_dna" on "core_dna"."id"="articles_article_dnas"."dna_id"
-                WHERE ("articles_article"."title" LIKE %s ESCAPE '\\' OR "articles_article"."content" LIKE %s ESCAPE '\\' OR "core_dna"."name" LIKE %s ESCAPE '\\' OR "core_dna"."sequence" LIKE %s ESCAPE '\\'
-                OR "core_reference"."name" LIKE %s ESCAPE '\\' OR "core_reference"."title" LIKE %s ESCAPE '\\')
+                WHERE ("articles_article"."title" ILIKE %s ESCAPE '\\' OR "articles_article"."content" ILIKE %s ESCAPE '\\' OR "core_dna"."name" ILIKE %s ESCAPE '\\' OR "core_dna"."sequence" ILIKE %s ESCAPE '\\'
+                OR "core_reference"."name" ILIKE %s ESCAPE '\\' OR "core_reference"."title" ILIKE %s ESCAPE '\\')
                 ORDER BY "articles_article"."added_in" DESC""",
                 [f"%{term}%", f"%{term}%", f"%{term}%", f"%{term}%", f"%{term}%", f"%{term}%"],
             )
